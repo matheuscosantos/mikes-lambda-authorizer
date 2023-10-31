@@ -34,6 +34,10 @@ resource "aws_ssm_parameter" "cognito_user_pool_id" {
   description = "Cognito User Pool ID"
   type        = "SecureString"
   value       = "cognito_user_pool_id"
+
+  lifecycle {
+    ignore_changes = [value]
+  }
 }
 
 resource "aws_ssm_parameter" "cognito_client_id" {
@@ -41,4 +45,8 @@ resource "aws_ssm_parameter" "cognito_client_id" {
   description = "Cognito Client ID"
   type        = "SecureString"
   value       = "cognito_client_id"
+
+  lifecycle {
+    ignore_changes = [value]
+  }
 }
