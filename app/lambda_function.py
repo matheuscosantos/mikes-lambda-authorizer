@@ -12,9 +12,6 @@ cognito_user_pool_id = os.getenv('COGNITO_USER_POOL_ID')
 def handler(event, context):
     try:
 
-        print(cognito_client_id)
-        print(cognito_user_pool_id)
-
         auth_response = sign_up(event)
 
         return {
