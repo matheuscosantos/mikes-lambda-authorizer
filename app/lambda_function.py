@@ -9,7 +9,7 @@ cognito_client_id = os.environ['COGNITO_CLIENT_ID']
 cognito_user_pool_id = os.environ['COGNITO_USER_POOL_ID']
 
 
-def lambda_handler(event, context):
+def handler(event, context):
     try:
         auth_response = sign_up(event)
 
