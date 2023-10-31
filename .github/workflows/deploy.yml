@@ -22,7 +22,7 @@ jobs:
         run: pip install -r app/requirements.txt
 
       - name: Generate Lambda ZIP
-        run: zip -r lambda_function.zip app
+        run: zip -r lambda_function.zip app/lambda_function.py app/requirements.txt
 
       - name: Copy Lambda ZIP to infra
         run: cp lambda_function.zip infra/lambda_function.zip
