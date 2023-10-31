@@ -32,10 +32,10 @@ jobs:
           aws-region: us-east-2
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform -chdir="./infra" init
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform -chdir="./infra" apply -auto-approve
 
       - name: Deploy Complete
         run: echo "Lambda deployed successfully"
