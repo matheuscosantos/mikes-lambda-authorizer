@@ -9,13 +9,13 @@ resource "aws_iam_role" "mikes_lambda_authorizer_role" {
 
 resource "aws_lambda_function" "mikes_lambda_authorizer" {
   function_name = "mikes_lambda_authorizer"
-  handler       = "lambda_function.handler"
+  handler       = "app/lambda_function.handler"
   runtime       = "python3.11"
   role          = aws_iam_role.mikes_lambda_authorizer_role.arn
 
   filename = "lambda_function.zip"
 
-  source_code_hash = filebase64sha256("lambda_function.zip")
+  source_code_hash = filebase64sha256("/app/lambda_function.zip")
 
   depends_on = [
     aws_iam_role.mikes_lambda_authorizer_role
