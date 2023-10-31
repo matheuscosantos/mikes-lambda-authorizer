@@ -24,6 +24,9 @@ jobs:
       - name: Generate Lambda ZIP
         run: zip -r lambda_function.zip app
 
+      - name: Copy Lambda ZIP to infra
+        run: cp lambda_function.zip infra/lambda_function.zip
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
