@@ -25,7 +25,7 @@ jobs:
         run: cp app/lambda_function.py app/requirements.txt infra/
 
       - name: Generate Lambda ZIP
-        run: zip -r lambda_function.zip infra/lambda_function.py infra/requirements.txt
+        run: zip -r infra/lambda_function.zip infra/lambda_function.py infra/requirements.txt
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
