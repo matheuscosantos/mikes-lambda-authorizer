@@ -22,7 +22,7 @@ jobs:
         run: pip install -r app/requirements.txt
 
       - name: Generate Lambda ZIP
-        run: zip -r app/lambda_function.zip app/
+        run: zip -r lambda_function.zip app/
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
