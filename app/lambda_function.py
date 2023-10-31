@@ -5,12 +5,16 @@ import boto3
 
 cognito = boto3.client('cognito-idp')
 
-cognito_client_id = os.environ['COGNITO_CLIENT_ID']
-cognito_user_pool_id = os.environ['COGNITO_USER_POOL_ID']
+cognito_client_id = os.getenv('COGNITO_CLIENT_ID')
+cognito_user_pool_id = os.getenv('COGNITO_USER_POOL_ID')
 
 
 def handler(event, context):
     try:
+
+        print(cognito_client_id)
+        print(cognito_user_pool_id)
+
         auth_response = sign_up(event)
 
         return {
