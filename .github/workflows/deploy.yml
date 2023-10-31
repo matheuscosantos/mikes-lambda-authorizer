@@ -21,11 +21,8 @@ jobs:
       - name: Install dependencies
         run: pip install -r app/requirements.txt
 
-      - name: Copy Lambda Files to infra
-        run: cp app/lambda_function.py app/requirements.txt infra/
-
       - name: Generate Lambda ZIP
-        run: zip -r infra/lambda_function.zip infra/lambda_function.py infra/requirements.txt
+        run: zip -r app/lambda_function.zip app/
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
