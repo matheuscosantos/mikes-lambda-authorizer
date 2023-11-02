@@ -2,12 +2,12 @@ provider "aws" {
   region = var.region
 }
 
-data "aws_cognito_user_pool" "mikes-user-pool" {
+data "aws_cognito_user_pools" "mikes-user-pool" {
   name = "mikes-user-pool"
 }
 
 data "aws_cognito_user_pool_clients" "mikes-cognito-app-client" {
-  user_pool_id = data.aws_cognito_user_pool.mikes-user-pool.id
+  user_pool_id = data.aws_cognito_user_pools.mikes-user-pool.id
 }
 
 resource "aws_iam_role" "mikes_lambda_authorizer_role" {
@@ -41,7 +41,7 @@ resource "aws_ssm_parameter" "cognito_user_pool_id" {
   name        = "/mikes_lambda_authorizer/cognito_user_pool_id"
   description = "Cognito User Pool ID"
   type        = "SecureString"
-  value       = data.aws_cognito_user_pool.mikes-user-pool.id
+  value       = data.aws_cognito_user_pools.mikes-user-pool.id
 }
 
 resource "aws_ssm_parameter" "cognito_client_id" {
