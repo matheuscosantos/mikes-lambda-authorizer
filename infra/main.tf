@@ -31,8 +31,8 @@ resource "aws_lambda_function" "mikes_lambda_authorizer" {
 
   environment {
     variables = {
-      COGNITO_CLIENT_ID    = data.aws_cognito_user_pools.mikes-user-pool.ids[0],
-      COGNITO_USER_POOL_ID = data.aws_cognito_user_pool_clients.mikes-user-pool-app-client.client_ids[0]
+      COGNITO_CLIENT_ID    = data.aws_cognito_user_pool_clients.mikes-user-pool-app-client.client_ids[0],
+      COGNITO_USER_POOL_ID = data.aws_cognito_user_pools.mikes-user-pool.ids[0]
     }
   }
 }
