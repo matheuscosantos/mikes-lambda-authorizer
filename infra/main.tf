@@ -6,16 +6,8 @@ data "aws_cognito_user_pools" "mikes-user-pool" {
   name = "mikes-user-pool"
 }
 
-output "mikes-user-pool" {
-  value = data.aws_cognito_user_pools.mikes-user-pool.id
-}
-
-data "aws_cognito_user_pool_clients" "mikes-cognito-app-client" {
+data "aws_cognito_user_pool_clients" "mikes-user-pool-app-client" {
   user_pool_id = data.aws_cognito_user_pools.mikes-user-pool.id
-}
-
-output "mikes-cognito-app-client" {
-  value = data.aws_cognito_user_pool_clients.mikes-cognito-app-client.client_ids
 }
 
 resource "aws_iam_role" "mikes_lambda_authorizer_role" {
@@ -39,22 +31,8 @@ resource "aws_lambda_function" "mikes_lambda_authorizer" {
 
   environment {
     variables = {
-      COGNITO_CLIENT_ID    = aws_ssm_parameter.cognito_client_id.value,
-      COGNITO_USER_POOL_ID = aws_ssm_parameter.cognito_user_pool_id.value
+      COGNITO_CLIENT_ID    = data.aws_cognito_user_pools.mikes-user-pool.id,
+      COGNITO_USER_POOL_ID = data.aws_cognito_user_pool_clients.mikes-user-pool-app-client.client_ids[0]
     }
   }
-}
-
-resource "aws_ssm_parameter" "cognito_user_pool_id" {
-  name        = "/mikes_lambda_authorizer/cognito_user_pool_id"
-  description = "Cognito User Pool ID"
-  type        = "SecureString"
-  value       = data.aws_cognito_user_pools.mikes-user-pool.id
-}
-
-resource "aws_ssm_parameter" "cognito_client_id" {
-  name        = "/mikes_lambda_authorizer/cognito_client_id"
-  description = "Cognito Client ID"
-  type        = "SecureString"
-  value       = data.aws_cognito_user_pool_clients.mikes-cognito-app-client.client_ids[0]
 }
