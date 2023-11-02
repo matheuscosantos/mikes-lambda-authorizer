@@ -6,8 +6,16 @@ data "aws_cognito_user_pools" "mikes-user-pool" {
   name = "mikes-user-pool"
 }
 
+output "mikes-user-pool" {
+  value = data.aws_cognito_user_pools.mikes-user-pool.id
+}
+
 data "aws_cognito_user_pool_clients" "mikes-cognito-app-client" {
   user_pool_id = data.aws_cognito_user_pools.mikes-user-pool.id
+}
+
+output "mikes-cognito-app-client" {
+  value = data.aws_cognito_user_pool_clients.mikes-cognito-app-client.client_ids
 }
 
 resource "aws_iam_role" "mikes_lambda_authorizer_role" {
