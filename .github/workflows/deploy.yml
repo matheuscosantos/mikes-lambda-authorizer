@@ -37,8 +37,11 @@ jobs:
       - name: Terraform Init
         run: terraform -chdir="./infra" init
 
-      - name: Terraform Apply
-        run: terraform -chdir="./infra" apply -auto-approve
+      - name: Plan
+        run: terraform -chdir="./infra" plan -out=tfplan
+
+      - name: Apply
+        run: terraform -chdir="./infra" apply -auto-approve tfplan
 
       - name: Deploy Complete
         run: echo "Lambda deployed successfully"
