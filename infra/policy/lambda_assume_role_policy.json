@@ -13,8 +13,7 @@
       "Principal": {
         "Service": "apigateway.amazonaws.com"
       },
-      "Action": "lambda:InvokeFunction",
-      "Resource": "arn:aws:lambda:us-east-2:644237782704:function:mikes_lambda_authorizer"
+      "Action": "lambda:InvokeFunction"
     }
   ]
 }
