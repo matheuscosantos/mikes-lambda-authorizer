@@ -16,7 +16,7 @@ def handler(event, context):
         username = json.loads(event['body'])['cpf']
 
         if username is None or username == '':
-            username = initiate_auth(cognito_admin_username)
+            username = cognito_admin_username
 
         auth_response = sign_up(username)
 
