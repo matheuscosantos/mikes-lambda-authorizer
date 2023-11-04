@@ -7,12 +7,16 @@ cognito = boto3.client('cognito-idp')
 
 cognito_client_id = os.getenv('COGNITO_CLIENT_ID')
 cognito_user_pool_id = os.getenv('COGNITO_USER_POOL_ID')
+cognito_admin_username = os.getenv('COGNITO_ADMIN_USERNAME')
 
 
 def handler(event, context):
     try:
 
         username = json.loads(event['body'])['cpf']
+
+        if username is None or username == '':
+            username = initiate_auth(cognito_admin_username)
 
         auth_response = sign_up(username)
 
